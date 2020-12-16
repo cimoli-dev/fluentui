@@ -185,7 +185,7 @@ export class BreadcrumbBase extends React.Component<IBreadcrumbProps, any> {
     const hasOverflowItems = renderedOverflowItems && renderedOverflowItems.length !== 0;
 
     const itemElements: JSX.Element[] = renderedItems.map((item, index) => (
-      <li className={this._classNames.listItem} key={item.key || String(index)}>
+      <li className={this._classNames.listItem} key={item.key || String(index)} aria-label={item.text}>
         {onRenderItem(item, this._onRenderItem)}
         {(index !== lastItemIndex || (hasOverflowItems && index === overflowIndex! - 1)) && (
           <DividerType
@@ -249,6 +249,9 @@ export class BreadcrumbBase extends React.Component<IBreadcrumbProps, any> {
     if (item.onClick || item.href) {
       return (
         <Link
+          aria-label={item.text}
+          aria-setsize={10}
+          aria-level={1}
           as={item.as}
           className={this._classNames.itemLink}
           href={item.href}
